@@ -1,0 +1,35 @@
+:host {
+  border: 1px solid;
+  min-height: 70px;
+  display: grid;
+  grid-template-rows: 30px auto;
+  background: cornflowerblue;
+
+  .rolls {
+    display: grid;
+    grid-template-columns: auto auto;
+    background: beige;
+
+    &.strike {
+      grid-template-columns: auto;
+    }
+
+    &.third {
+      grid-template-columns: auto auto auto;
+    }
+
+    .roll-one,
+    .roll-two,
+    .roll-third {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .frame-score {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+}

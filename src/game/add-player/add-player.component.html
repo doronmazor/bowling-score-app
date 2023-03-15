@@ -1,0 +1,10 @@
+<div>
+  Add new player (max 6 players)
+</div>
+<form (ngSubmit)="addPlayer()" #frameForm>
+  <label for="name">Player name:</label>
+  <input type="text" name="name" [(ngModel)]="name" required>
+  <button type="submit" [disabled]="!isValid()">Add Player</button>
+</form>
+
+<button [disabled]="!isStartGameValid()" (click)="startGame()">Start Game</button>

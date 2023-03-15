@@ -1,0 +1,28 @@
+:host {
+  display: inline-grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid;
+  padding: 10px;
+  gap: 10px;
+
+  .update-score {
+    font-size: 18px;
+    justify-content: center;
+    display: flex;
+  }
+
+  form {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-width: 400px;
+    grid-template-columns: 400px;
+  }
+
+  .warning {
+    color: red;
+  }
+}

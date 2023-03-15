@@ -1,0 +1,38 @@
+:host {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+
+  .title {
+    display: grid;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  .player-score {
+    display: grid;
+    gap: 10px;
+  }
+
+  .update-player-score-container,
+  .add-player-container {
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .new-game-button {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    padding: 10px;
+  }
+
+  .finish-container {
+    display: grid;
+    justify-content: center;
+    font-size: 24px;
+    color: blue;
+  }
+}

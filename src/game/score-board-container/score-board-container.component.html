@@ -1,0 +1,14 @@
+<div class="score-board-container" [ngClass]="{'has-players': (players$ | async)?.length > 0}">
+  <div *ngIf="(players$ | async)?.length" class="score-board-headers">
+    <div>Player Name</div>
+    <ng-container *ngFor="let index of rounds; let i = index;">
+      <div class="round">{{ i + 1 }}</div>
+    </ng-container>
+    <div class="total-score">Total Score</div>
+  </div>
+  <div class="player-score">
+    <ng-container *ngFor="let player of (players$ | async); let i = index;">
+      <app-player-score-board [player]="player"></app-player-score-board>
+    </ng-container>
+  </div>
+</div>

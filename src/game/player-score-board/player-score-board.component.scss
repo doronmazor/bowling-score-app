@@ -1,0 +1,11 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(12, 100px);
+  align-items: center;
+  justify-content: center;
+
+  .total-score {
+    display: grid;
+    justify-content: center;
+  }
+}

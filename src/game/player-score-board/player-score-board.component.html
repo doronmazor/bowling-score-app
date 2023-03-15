@@ -1,0 +1,9 @@
+<div>
+  {{ player.name }}
+</div>
+<ng-container *ngFor="let frame of player?.frames; let i = index;">
+  <app-score-board-item [frame]="frame"></app-score-board-item>
+</ng-container>
+<div class="total-score">
+  {{ player.totalScore }}
+</div>

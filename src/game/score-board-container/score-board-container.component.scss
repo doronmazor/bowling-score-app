@@ -1,0 +1,36 @@
+:host {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  background: darkgrey;
+
+  .score-board-container {
+    &.has-players {
+      padding: 25px;
+    }
+  }
+
+  .player-score {
+    display: grid;
+    gap: 10px;
+  }
+
+  .score-board-headers {
+    display: grid;
+    grid-template-columns: repeat(12, 100px);
+    grid-template-rows: 40px;
+    justify-content: center;
+    align-items: center;
+
+    .round {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .total-score {
+      display: grid;
+      justify-content: center;
+    }
+  }
+}

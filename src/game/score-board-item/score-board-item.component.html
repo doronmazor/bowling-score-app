@@ -1,0 +1,15 @@
+<div class="rolls" [ngClass]="{'strike': (frame.rollOne === 10 && !frame.rollThird), 'third': frame.rollThird}">
+  <div class="roll-one">
+    <span>{{ isStrike() ? 'X' : frame.rollOne }}</span>
+  </div>
+  <div *ngIf="(frame.rollOne !== 10 || frame.rollThird)" class="roll-two">
+    <span>{{ frame.rollTwo === 10 ? 'X' : isSpare() ? '/' : frame.rollTwo }}</span>
+  </div>
+  <div *ngIf="frame.rollThird" class="roll-third">
+    <span>{{ frame.rollThird === 10 ? 'X' : frame.rollThird }}</span>
+  </div>
+</div>
+<div class="frame-score">
+  {{ frame.score }}
+</div>
+
