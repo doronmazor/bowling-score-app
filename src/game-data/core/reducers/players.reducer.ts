@@ -81,6 +81,8 @@ function updateSpareOrStrikeIfNeeded(player: IPlayer, currentFrameIndex: number)
     updateFrameScoreIfNeeded(player, currentFrameIndex);
   }
 
+  updateFrameScoreIfNeeded(player, currentFrameIndex);
+
   return player;
 }
 
