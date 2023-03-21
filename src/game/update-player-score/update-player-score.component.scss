@@ -12,13 +12,14 @@
     font-size: 18px;
     justify-content: center;
     display: flex;
+    font-weight: 600;
   }
 
   form {
     display: grid;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     min-width: 400px;
     grid-template-columns: 400px;
   }
@@ -37,7 +38,8 @@
       justify-content: center;
     }
 
-    input {
+    input,
+    button {
       cursor: pointer;
     }
   }
