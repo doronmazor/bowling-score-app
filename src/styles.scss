@@ -20,4 +20,5 @@ button {
 
 button[disabled] {
   background: rgba(255, 255, 255, 0.12);
+  cursor: not-allowed;
 }
