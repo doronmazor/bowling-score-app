@@ -10,6 +10,5 @@ export const selectPlayers = createSelector(selectPlayersState, state => Object.
 export const selectCurrentPlayer = createSelector(selectPlayersState, selectGameCurrentPlayerId, (state, currentPlayerId) => state.entities[currentPlayerId]);
 
 export const selectWinnerPlayer = createSelector(selectPlayers, players => {
-  const playerCopy = JSON.parse(JSON.stringify(players));
-  return playerCopy.sort((p1, p2) => p2.totalScore - p1.totalScore)[0]
+  return players.sort((p1, p2) => p2.totalScore - p1.totalScore)[0]
 });
