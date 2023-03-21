@@ -55,43 +55,29 @@ function updateSpareOrStrikeIfNeeded(player: IPlayer, currentFrameIndex: number)
   }
 
   if (hasPreviousSpareOrStrike(player.frames, currentFrameIndex)) {
-    // updating strike score
     const previousFrame = player.frames[currentFrameIndex - 1];
     if (currentFrameIndex > 1) {
       const previousTwoFrame = player.frames[currentFrameIndex - 2];
-      if (isStrike(previousTwoFrame)) {
-        previousTwoFrame.score = player.totalScore + 10 + getFrameScore(previousFrame) + getFrameScore(currentFrame);
+      // checking if 2 strikes in a row need to update previous two frame
+      if (isStrike(previousTwoFrame) && isStrike(previousFrame)) {
+        previousTwoFrame.score = player.totalScore + 10 + 10 + getRollOneFrameScore(currentFrame);
         player.totalScore = previousTwoFrame.score;
-
-        if (!isStrikeOrSpare(previousFrame)) {
-          updateFrameScoreIfNeeded(player, currentFrameIndex - 1);
-          updateFrameScoreIfNeeded(player, currentFrameIndex);
-        } else if (isSpare(previousFrame)) {
-          previousFrame.score = previousTwoFrame.score + 10 + getFrameScore(currentFrame);
-          player.totalScore = previousFrame.score;
-          updateFrameScoreIfNeeded(player, currentFrameIndex);
-        } else if (isStrike(previousFrame) && currentFrameIndex === 9) {
-          previousFrame.score = player.totalScore + 10 + getFrameScore(currentFrame);
-          player.totalScore = previousFrame.score;
-        }
-      } else if (isSpare(previousFrame)) {
-        previousFrame.score = previousTwoFrame.score + 10 + getFrameScore(currentFrame);
-        player.totalScore = previousFrame.score;
-        updateFrameScoreIfNeeded(player, currentFrameIndex);
-      } else if (isStrike(previousFrame) && currentFrameIndex === 9) {
-        previousFrame.score = player.totalScore + 10 + getFrameScore(currentFrame);
-        player.totalScore = previousFrame.score;
       }
-    } else if (isSpare(previousFrame)) {
+    }
+
+    // updating strike score if previous frame is strike and current frame is not strike
+    if (isStrike(previousFrame) && (!isStrike(currentFrame) || currentFrameIndex === 9)) {
       previousFrame.score = player.totalScore + 10 + getFrameScore(currentFrame);
+      player.totalScore = previousFrame.score;
+      updateFrameScoreIfNeeded(player, currentFrameIndex);
+
+    // Updating spare score
+    } else if (isSpare(previousFrame)) {
+      previousFrame.score = player.totalScore + 10 + getRollOneFrameScore(currentFrame);
       player.totalScore = previousFrame.score;
       updateFrameScoreIfNeeded(player, currentFrameIndex);
     }
   } else {
-    updateFrameScoreIfNeeded(player, currentFrameIndex);
-  }
-
-  if (currentFrameIndex === 9) {
     updateFrameScoreIfNeeded(player, currentFrameIndex);
   }
 
@@ -100,7 +86,17 @@ function updateSpareOrStrikeIfNeeded(player: IPlayer, currentFrameIndex: number)
 
 function updateFrameScoreIfNeeded(player: IPlayer, currentFrameIndex: number) {
   const currentFrame = player.frames[currentFrameIndex];
-  if (!isStrikeOrSpare(currentFrame) || currentFrameIndex === 9) {
+  if (currentFrameIndex === 9 && currentFrame.score === undefined) {
+    if (isStrike(currentFrame)) {
+      currentFrame.score = player.totalScore + 10 + (currentFrame.rollTwo ?? 0) + (currentFrame.rollThird ?? 0);
+    } else if (isSpare(currentFrame)) {
+      currentFrame.score = player.totalScore + 10 + (currentFrame.rollThird ?? 0);
+    } else {
+      currentFrame.score = player.totalScore + getFrameScore(currentFrame) + (currentFrame.rollThird ?? 0);
+    }
+
+    player.totalScore = currentFrame.score;
+  } else if (!isStrikeOrSpare(currentFrame) && currentFrame.score === undefined) {
     currentFrame.score = player.totalScore + getFrameScore(currentFrame);
     player.totalScore = currentFrame.score;
   }
@@ -111,13 +107,13 @@ function hasPreviousSpareOrStrike(frames: IFrame[], currentFrameIndex: number) {
     return false;
   }
 
-  // checking if spare
+  // checking if spare or strike in previous frame
   const previousFrame = frames[currentFrameIndex - 1];
   if (isSpare(previousFrame) || isStrike(previousFrame)) {
     return true;
   }
 
-  // checking if strike
+  // checking if strike in previous two frame
   if (currentFrameIndex > 1) {
     const previousTwoFrame = frames[currentFrameIndex - 2];
     if (isStrike(previousTwoFrame)) {
@@ -129,5 +125,9 @@ function hasPreviousSpareOrStrike(frames: IFrame[], currentFrameIndex: number) {
 }
 
 function getFrameScore(frame: IFrame): number {
-  return frame.rollOne + (frame.rollTwo ?? 0) + (frame.rollThird ?? 0);
+  return frame.rollOne + (frame.rollTwo ?? 0);
+}
+
+function getRollOneFrameScore(frame: IFrame): number {
+  return frame.rollOne;
 }

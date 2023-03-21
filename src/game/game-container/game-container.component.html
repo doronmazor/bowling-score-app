@@ -1,15 +1,14 @@
-<div class="title">Bowling Score App</div>
+<div *ngIf="!(isGameStarted$ | async)" class="add-player-container">
+  <app-add-player></app-add-player>
+</div>
 <div>
   <app-score-board-container></app-score-board-container>
 </div>
 <div *ngIf="(isGameStarted$ | async) && !(isGameFinished$ | async)" class="update-player-score-container">
   <app-update-player-score></app-update-player-score>
 </div>
-<div *ngIf="!(isGameStarted$ | async)" class="add-player-container">
-  <app-add-player></app-add-player>
-</div>
 <div class="finish-container" *ngIf="(isGameFinished$ | async)">
   <div class="game-finished">Game Finished</div>
   <div class="winner">Winner: {{ (selectWinnerPlayer$ | async)?.name }}</div>
+  <button class="new-game-button" (click)="newGame()">Start New Game</button>
 </div>
-<button class="new-game-button" (click)="newGame()">New Game</button>

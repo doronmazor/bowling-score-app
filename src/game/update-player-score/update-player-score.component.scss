@@ -6,6 +6,7 @@
   border: 1px solid;
   padding: 10px;
   gap: 10px;
+  background: rgba(36, 36, 36, 1);
 
   .update-score {
     font-size: 18px;
@@ -24,5 +25,20 @@
 
   .warning {
     color: red;
+  }
+
+  .range-slider {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    align-items: center;
+
+    .roll-value {
+      display: grid;
+      justify-content: center;
+    }
+
+    input {
+      cursor: pointer;
+    }
   }
 }

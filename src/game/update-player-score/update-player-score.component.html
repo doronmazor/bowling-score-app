@@ -1,14 +1,24 @@
 <div class="update-score">
-  Update score for player: '{{(selectCurrentPlayer$ | async)?.name}}'
+  Player '{{(selectCurrentPlayer$ | async)?.name}}' turn
 </div>
 <form (ngSubmit)="submitFrame()" #frameForm>
-  <label for="roll1">Roll 1:</label>
-  <input id="roll-one" type="number" min="0" max="10" name="roll1" [(ngModel)]="rollOne" required>
-  <label for="roll2">Roll 2:</label>
-  <input id="roll-two" type="number" min="0" max="10" name="roll2" [(ngModel)]="rollTwo">
-  <label *ngIf="shouldAddRollThird()" for="roll3">Roll 3:</label>
-  <input *ngIf="shouldAddRollThird()" id="roll-third" type="number" min="0" max="10" name="roll3" [(ngModel)]="rollThird">
+  <div class="range-slider">
+    <label for="roll1">Roll 1:</label>
+    <input type="range" min="0" max="10" step="1" [(ngModel)]="rollOne" required (ngModelChange)="onRollOneUpdate($event)" [ngModelOptions]="{standalone: true}"/>
+    <label class="roll-value">{{rollOne}}</label>
+  </div>
+
+  <div class="range-slider">
+    <label for="roll1">Roll 2:</label>
+    <input type="range" min="0" max="{{rollTwoMax()}}" step="1" [(ngModel)]="rollTwo" required  [ngModelOptions]="{standalone: true}" disabled="{{disableRollTwo()}}"/>
+    <label class="roll-value">{{rollTwo}}</label>
+  </div>
+
+  <div class="range-slider" *ngIf="shouldAddRollThird()">
+    <label for="roll1">Roll 3:</label>
+    <input type="range" min="0" max="10" step="1" [(ngModel)]="rollThird" required  [ngModelOptions]="{standalone: true}"/>
+    <label class="roll-value">{{rollThird}}</label>
+  </div>
+
   <button type="submit" [disabled]="!isValid()">Submit</button>
-  <span class="warning" *ngIf="!isValid() && !shouldAddRollThird()">Total value of roll 1 + roll 2 should be less or equal 10</span>
-  <span class="warning" *ngIf="shouldAddRollThird()">Total value of roll 1 + roll 2 should be less or equal 10 (or both 10). and role 3 less or equal 10</span>
 </form>

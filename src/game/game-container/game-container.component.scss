@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 50px;
+  padding-top: 20px;
 
   .title {
     display: grid;
@@ -23,16 +24,20 @@
   }
 
   .new-game-button {
-    position: absolute;
-    left: 20px;
-    top: 20px;
     padding: 10px;
   }
 
   .finish-container {
     display: grid;
     justify-content: center;
+    gap: 10px;
     font-size: 24px;
-    color: blue;
+
+    .winner {
+      display: grid;
+      justify-content: center;
+      font-weight: 600;
+      color: rgba(40, 153, 245, 1);
+    }
   }
 }

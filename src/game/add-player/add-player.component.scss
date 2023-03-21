@@ -4,4 +4,12 @@
   border: 1px solid;
   border-radius: 4px;
   gap: 10px;
+  min-width: 500px;
+  background: rgba(36, 36, 36, 1);
+
+  form {
+    display: grid;
+    grid-template-columns: 20% 50% calc(30% - 20px);
+    gap: 10px;
+  }
 }

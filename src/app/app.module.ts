@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { ShellModule } from './../shell/shell.module';
 import { AppRoutingModule } from './app-routing.module';
 import { GameModule } from '../game/game.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ShellModule,
     GameModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),

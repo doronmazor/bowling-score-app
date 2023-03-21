@@ -27,4 +27,16 @@ export class ScoreBoardItemComponent implements OnInit {
   public isStrikeOrSpare() {
     return this.isSpare() || this.isStrike();
   }
+
+  public rollOneText() {
+    return this.isStrike() ? 'X' : this.frame.rollOne;
+  }
+
+  public rollTwoText() {
+    return this.frame.rollTwo === 10 && this.frame.rollThird ? 'X' : this.isSpare() ? '/' : this.frame.rollTwo;
+  }
+
+  public rollThirdText() {
+    return this.frame.rollThird === 10 ? 'X' : this.frame.rollThird;
+  }
 }

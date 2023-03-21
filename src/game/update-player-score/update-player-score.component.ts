@@ -9,9 +9,9 @@ import { GameStoreService } from '../../game-data/core/services/game-store.servi
   styleUrls: ['./update-player-score.component.scss']
 })
 export class UpdatePlayerScoreComponent implements OnInit, OnDestroy {
-  public rollOne: number = null;
-  public rollTwo: number = null;
-  public rollThird: number = null;
+  public rollOne: number = 0;
+  public rollTwo: number = 0;
+  public rollThird: number = 0;
 
   public selectCurrentPlayer$: Observable<IPlayer>;
   public currentRound;
@@ -67,6 +67,18 @@ export class UpdatePlayerScoreComponent implements OnInit, OnDestroy {
     return this.currentRound === 9 && (this.rollOne === 10 || this.rollOne + this.rollTwo === 10);
   }
 
+  public onRollOneUpdate(event) {
+    this.rollTwo = 0;
+  }
+
+  public rollTwoMax() {
+    return this.currentRound === 9 && this.rollOne === 10 ? 10 : 10 - this.rollOne;
+  }
+
+  public disableRollTwo() {
+    return this.currentRound === 9 && this.rollOne === 10 ? false : this.rollOne === 10;
+  }
+
   private tenthRoundValidation() {
     return this.rollOneValid() &&
             this.rollOne === 10 ? (this.rollTwo <= 10 && this.rollTwo >= 0) : this.rollTwoValid() &&
@@ -78,9 +90,9 @@ export class UpdatePlayerScoreComponent implements OnInit, OnDestroy {
   }
 
   private resetInput() {
-    this.rollOne = null;
-    this.rollTwo = null;
-    this.rollThird = null;
+    this.rollOne = 0;
+    this.rollTwo = 0;
+    this.rollThird = 0;
   }
 
   private maxRounds() {

@@ -25,7 +25,7 @@ export class AddPlayerComponent implements OnInit {
   }
 
   public isValid() {
-    return this.name.length && this.id < 7
+    return this.name.length && this.id < 9
   }
 
   public isStartGameValid() {

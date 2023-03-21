@@ -8,4 +8,9 @@
     display: grid;
     justify-content: center;
   }
+
+  .name,
+  .total-score {
+    font-weight: 600;
+  }
 }
