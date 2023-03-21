@@ -13,6 +13,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
   public isGameStarted$: Observable<boolean>;
   public isGameFinished$: Observable<boolean>;
   public selectWinnerPlayer$: Observable<IPlayer>;
+  public selectWinnerPlayers$: Observable<IPlayer[]>;
 
   private destroy$ = new Subject<void>();
 
@@ -22,6 +23,7 @@ export class GameContainerComponent implements OnInit, OnDestroy {
     this.isGameStarted$ = this.gameStore.isGameStarted$.pipe(takeUntil(this.destroy$));
     this.isGameFinished$ = this.gameStore.isGameFinished$.pipe(takeUntil(this.destroy$));
     this.selectWinnerPlayer$ = this.gameStore.selectWinnerPlayer$.pipe(takeUntil(this.destroy$));
+    this.selectWinnerPlayers$ = this.gameStore.selectWinnerPlayers$.pipe(takeUntil(this.destroy$));
   }
 
   public ngOnDestroy(): void {

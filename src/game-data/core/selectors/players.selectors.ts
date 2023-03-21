@@ -12,3 +12,7 @@ export const selectCurrentPlayer = createSelector(selectPlayersState, selectGame
 export const selectWinnerPlayer = createSelector(selectPlayers, players => {
   return players.sort((p1, p2) => p2.totalScore - p1.totalScore)[0]
 });
+
+export const selectWinnerPlayers = createSelector(selectWinnerPlayer, selectPlayers, (winnerPlayer, players) => {
+  return players.filter(p => p.totalScore === winnerPlayer.totalScore)
+});

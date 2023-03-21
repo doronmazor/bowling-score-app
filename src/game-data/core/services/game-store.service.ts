@@ -36,6 +36,10 @@ export class GameStoreService {
     return this.store.select(fromGame.selectWinnerPlayer);
   }
 
+  public get selectWinnerPlayers$(): Observable<IPlayer[]> {
+    return this.store.select(fromGame.selectWinnerPlayers);
+  }
+
   public startGame() {
     this.store.dispatch(actions.startGame());
   }

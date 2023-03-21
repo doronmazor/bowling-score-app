@@ -9,6 +9,10 @@
 </div>
 <div class="finish-container" *ngIf="(isGameFinished$ | async)">
   <div class="game-finished">Game Finished</div>
-  <div class="winner">Winner: {{ (selectWinnerPlayer$ | async)?.name }}</div>
+  <div class="winner" *ngIf="(selectWinnerPlayers$ | async)?.length === 1">Winner: {{ (selectWinnerPlayer$ | async)?.name }}</div>
+  <div class="winner" *ngIf="(selectWinnerPlayers$ | async)?.length > 1">
+    Winners:
+    <span *ngFor="let player of (selectWinnerPlayers$ | async)">{{player.name}}</span>
+  </div>
   <button class="new-game-button" (click)="newGame()">Start New Game</button>
 </div>
