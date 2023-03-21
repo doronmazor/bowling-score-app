@@ -24,10 +24,6 @@
     grid-template-columns: 400px;
   }
 
-  .warning {
-    color: red;
-  }
-
   .range-slider {
     display: grid;
     grid-template-columns: 20% 60% 20%;
@@ -38,8 +34,7 @@
       justify-content: center;
     }
 
-    input,
-    button {
+    input {
       cursor: pointer;
     }
   }
